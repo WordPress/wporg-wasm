@@ -20,7 +20,7 @@ export default forwardRef( ( { onClickBack }, ref ) => {
 
 	const queryString = buildQueryString( [
 		[ 'rpc', '1' ],
-		[ 'url', '/wp-admin/' ],
+		[ 'url', '/' ],
 		[ 'mode', 'seamless' ],
 		[ 'theme', activeTheme.zip ],
 		...activePlugins.map( ( plugin ) => [ 'plugin', plugin.zip ] ),

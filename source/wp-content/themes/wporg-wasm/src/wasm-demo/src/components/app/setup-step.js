@@ -23,25 +23,25 @@ export default ( { onSubmit } ) => {
 	return (
 		<Modal
 			isFullScreen={ true }
-			title="In-Browser WordPress"
+			title="WordPress Sandbox"
 			onRequestClose={ onSubmit }
 			className="wporg-setup-modal"
 		>
 			<p>
-				Welcome to a new and exciting way fo testing WordPress Themes
-				and Plugins all with your browser! To get started choose a theme
-				and a collection of plugins.{ ' ' }
+				Welcome to a new and exciting way of testing WordPress Themes
+				and Plugins. Choose a theme, sprinkle with a plugin or a few,
+				and start a new WordPress Sandbox – all inside of your browser!
 			</p>
 
 			<Flex wrap={ true }>
 				<FlexItem>
-					<h4 className="wporg-section-title">1. Select a theme</h4>
+					<h4 className="wporg-setup-modal__section-title">Select a theme</h4>
 					<Flex
 						as="ul"
 						justify="flex-start"
 						className="wporg-tab-item-list is-theme"
 						wrap={ true }
-						gap="16px"
+						gap="24px"
 					>
 						{ themes.map( ( theme ) => (
 							<FlexItem
@@ -65,10 +65,13 @@ export default ( { onSubmit } ) => {
 										gap={ 0 }
 									>
 										<FlexItem>
-											<img
-												src={ theme.thumbnail }
-												alt={ theme.name }
-											/>
+											<div className="wporg-tab-item-list__theme-thumbnail-wrapper">
+												<img
+													className="wporg-tab-item-list__theme-thumbnail"
+													src={ theme.thumbnail }
+													alt={theme.name}
+												/>
+											</div>
 										</FlexItem>
 										<FlexBlock
 											as="h3"
@@ -83,8 +86,8 @@ export default ( { onSubmit } ) => {
 						) ) }
 					</Flex>
 
-					<h4 className="wporg-section-title">
-						2. Add a few plugins
+					<h4 className="wporg-setup-modal__section-title">
+						Add plugins
 					</h4>
 					<Flex
 						className="wporg-tab-item-list is-plugin"
@@ -135,7 +138,6 @@ export default ( { onSubmit } ) => {
 										</FlexItem>
 									</Flex>
 								</a>
-								<div className="wporg-tab-item-list__overlay" />
 							</FlexItem>
 						) ) }
 					</Flex>
@@ -146,7 +148,7 @@ export default ( { onSubmit } ) => {
 							className="wporg-tab-item-list__confirm"
 							onClick={ onSubmit }
 						>
-							Start Your Sandbox!
+							Start Sandbox
 						</Button>
 					</div>
 				</FlexItem>

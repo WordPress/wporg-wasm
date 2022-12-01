@@ -5,8 +5,14 @@
  * Replace them with your own styles or remove the file completely.
  */
 
- html {
+html {
 	--wp-global-header-height: 0px !important;
+}
+
+@mixin default-font {
+	font-size: 14px;
+	font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+	font-weight: 600;
 }
 
 .wporg-demo-browser {
@@ -48,62 +54,47 @@
 	margin-bottom: 20px;
 	padding: 0;
 
-	/* A CSS hack to grow all flexbox lines but the last one*/
-	&:after {
-		content: "";
-		flex: 1 0 200px;
-		visibility: hidden;
-	}
+	.wporg-tab-item-list-item {
+		cursor: pointer;
 
-	a {
-		color: #1e1e1e;
-		line-height: 14px;
-		text-decoration: none;
-
-		img { 
-			border: 1px solid var(--wp--preset--color--light-grey-1);
+		a {
+			color: #1e1e1e;
+			line-height: 14px;
+			text-decoration: none;
 		}
-	}
+	
+		.wporg-tab-item-list__item-name {
+			@include default-font;
+	
+			background: hsla(0,0%,100%,.65);
+			color: var(--wp--preset--color--charcoal-1);
+			font-size: 14px;
+			font-weight: 400;
+			margin: 0;
+			overflow: hidden;
+			padding: 8px 0;
+		}
 
-	.components-checkbox-control__input-container {
-		margin-right: 0;
-	}
-	.components-base-control__field {
-		margin-bottom: 0;
-	}
+		&.is-active {
+			.wporg-tab-item-list__item-name {
+				color: var(--wp--preset--color--blueberry-1);
+			}
+			img {
+				outline-color: var(--wp--preset--color--blueberry-1);
+			}
+		}
 
-	.wporg-tab-item-list__item-name {
-		background: hsla(0,0%,100%,.65);
-		color: var(--wp--preset--color--charcoal-1);
-		font-size: 12px;
-		font-weight: 400;
-		margin: 0;
-		overflow: hidden;
-		padding: 8px 0;
-	}
-
-	.wporg-tab-item-list__overlay {
-		position: absolute;
-		content: '';
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		pointer-events: none;
-		top: 0;
-		left: 0;
-		right: 0;
-		bottom: 0;
-		background: rgba(255,255,255,0.2);
-		opacity: 0;
-		transition: opacity ease-in 0.1s;
-	}
-
-	.wporg__flex-grow {
-		flex-grow: 1;
-	}
-
-	.wporg-tab-item-list-item:hover {
-		outline-color: var(--wp--preset--color--pale-cyan-blue);
+		&:hover {
+			a {
+				text-decoration-color: var(--wp--preset--color--blueberry-2);
+			}
+			.wporg-tab-item-list__item-name {
+				color: var(--wp--preset--color--blueberry-2);
+			}
+			img {
+				outline-color: var(--wp--preset--color--blueberry-2);
+			}
+		}
 	}
 
 	&.is-theme {
@@ -113,24 +104,26 @@
 			cursor: pointer;
 			transition: outline-color ease-in 0.1s;
 	
-			max-width: 190px;
-			min-width: 100px;
+			width: 200px;
 			flex-grow: 1;
-
-			&.is-active img {
-				position: relative;
-				outline: 1px solid var(--wp--preset--color--vivid-cyan-blue);
-				outline-width: 2px;
-			}
-
-			a {
-				text-decoration: none;
-			}
 		}
 
-		img {
+		/* A CSS hack to grow all flexbox lines but the last one*/
+		&:after {
+			content: "";
+			flex: 1 0 200px;
+			visibility: hidden;
+		}
+		
+		.wporg-tab-item-list__theme-thumbnail-wrapper {
 			width: 100%;
 			aspect-ratio: 195/146;
+		}
+
+		.wporg-tab-item-list__theme-thumbnail {
+			position: relative;
+			width: 100%;
+			outline: 1px solid transparent;
 			border-radius: 2px;
 		}
 	}
@@ -138,6 +131,13 @@
 	&.is-plugin {
 		margin-bottom: 100px;
 
+		/* A CSS hack to grow all flexbox lines but the last one*/
+		&:after {
+			content: "";
+			flex: 1 0 100px;
+			visibility: hidden;
+		}
+		
 		img {
 			width: 32px;
 			height: 32px;
@@ -148,18 +148,25 @@
 			border: 1px solid #dedede;
 			border-radius: 4px;
 			padding: 8px 12px;
-
-			a {
-				text-decoration: none;
-			}
+			flex-grow: 1;
 
 			&.is-active {
-				border-color: var(--wp--preset--color--vivid-cyan-blue);
+				border-color: var(--wp--preset--color--blueberry-1);
+			}
+			&:hover {
+				border-color: var(--wp--preset--color--blueberry-2);
 			}
 		}
 
 		.wporg-tab-item-list__item-name {
 			margin: auto;
+		}
+
+		.components-checkbox-control__input-container {
+			margin-right: 0;
+		}
+		.components-base-control__field {
+			margin-bottom: 0;
 		}
 	}
 }
@@ -180,7 +187,6 @@
 		background: #A5AFBC;
 		border-radius: 50%;
 		box-shadow: 20px 0 0 0 #A5AFBC, 40px 0 0 0 #A5AFBC;
-
 	}
 }
 
@@ -190,17 +196,15 @@
 	border-radius: 2px;
 }
 
-.wporg-section-title {
-	margin: 1.8rem 0 1rem 0;
-	font-size: var(--wp--preset--font-size--normal);
-}
+.wp-block-create-block-wasm-demo 
+.wporg-tab-item-list__confirm {
+	@include default-font;
 
-.wp-block-create-block-wasm-demo .wporg-tab-item-list__confirm {
 	height: auto;
-	font-size: 2rem;
-	padding: 1rem 1.5rem;
 	margin: 0 auto;
 	display: block;
+
+	background-color: var(--wp--preset--color--blueberry-1);
 }
 
 .wporg-demo-browser-preview-bar { 
@@ -221,14 +225,34 @@
     box-sizing: border-box;
 
 	background-color: #fff;
-	border-top: 1px solid var(--wp--preset--color--light-grey-1);	
 	
 	.wporg-tab-item-list__confirm {
-		font-size: 1.5em;
-		padding: 0.9em 1em;
+		@include default-font;
+		
+		display: block;
+		height: auto;
+		font-weight: normal;
+		padding: 13.5px 16px;
+		background-color: var(--wp--preset--color--blueberry-1) !important;
 	}
 }
 
 .wporg-setup-modal {
-	max-width: 900px !important;;
+	max-width: 943px !important;
+
+	.components-modal__header {
+		.components-modal__header-heading {
+			font-size: 20px;
+			font-weight: 400;
+		}
+	}
+
+	.wporg-setup-modal__section-title {
+		@include default-font;
+		margin-top: 32px;
+
+		&:first-child {
+			margin-top: 12px;
+		}
+	}
 }

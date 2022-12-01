@@ -15,53 +15,53 @@ const themes = [
 		zip: 'twentytwentythree.latest-stable.zip',
 	},
 	{
-		url: 'https://wp-themes.com/twentytwentytwo',
+		url: 'https://wp-themes.com/skatepark',
 		thumbnail:
-			'https://i0.wp.com/themes.svn.wordpress.org/twentytwentytwo/1.3/screenshot.png?w=572&strip=all',
-		name: 'Twenty Twenty-Two',
-		zip: 'twentytwentytwo.latest-stable.zip',
+			'https://i0.wp.com/themes.svn.wordpress.org/skatepark/1.0.48/screenshot.png?w=572&strip=all',
+		name: 'Skatepark',
+		zip: 'skatepark.latest-stable.zip',
 	},
 	{
-		url: 'https://wp-themes.com/twentytwentyone',
+		url: 'https://wp-themes.com/pendant',
 		thumbnail:
-			'https://i0.wp.com/themes.svn.wordpress.org/twentytwentyone/1.7/screenshot.png?w=572&strip=all',
-		name: 'Twenty Twenty-One',
-		zip: 'twentytwentyone.latest-stable.zip',
+			'https://i0.wp.com/themes.svn.wordpress.org/pendant/1.0.11/screenshot.png?w=572&strip=all',
+		name: 'Pendant',
+		zip: 'pendant.latest-stable.zip',
 	},
 	{
-		url: 'https://wp-themes.com/astra',
+		url: 'https://wp-themes.com/disco',
 		thumbnail:
-			'https://i0.wp.com/themes.svn.wordpress.org/astra/3.9.4/screenshot.jpg?w=572&strip=all',
-		name: 'Astra',
-		zip: 'astra.latest-stable.zip',
+			'https://i0.wp.com/themes.svn.wordpress.org/disco/1.0.3/screenshot.png?w=572&strip=all',
+		name: 'Disco',
+		zip: 'disco.latest-stable.zip',
 	},
 	{
-		url: 'https://wp-themes.com/twentytwenty',
+		url: 'https://wp-themes.com/stewart',
 		thumbnail:
-			'https://i0.wp.com/themes.svn.wordpress.org/twentytwenty/2.1/screenshot.png?w=572&strip=all',
-		name: 'Twenty Twenty',
-		zip: 'twentytwenty.latest-stable.zip',
+			'https://i0.wp.com/themes.svn.wordpress.org/stewart/1.15/screenshot.png?w=572&strip=all',
+		name: 'Stewart',
+		zip: 'stewart.latest-stable.zip',
 	},
 	{
-		url: 'https://wp-themes.com/oceanwp',
+		url: 'https://wp-themes.com/tove',
 		thumbnail:
-			'https://i0.wp.com/themes.svn.wordpress.org/oceanwp/3.3.6/screenshot.png?w=572&strip=all',
-		name: 'OceanWP',
-		zip: 'oceanwp.latest-stable.zip',
+			'https://i0.wp.com/themes.svn.wordpress.org/tove/0.7.1/screenshot.png?w=572&strip=all',
+		name: 'Tove',
+		zip: 'tove.latest-stable.zip',
 	},
 	{
-		url: 'https://wp-themes.com/twentyseventeen',
+		url: 'https://wp-themes.com/rainfall',
 		thumbnail:
-			'https://i0.wp.com/themes.svn.wordpress.org/twentyseventeen/3.1/screenshot.png?w=572&strip=all',
-		name: 'Twenty Seventeen',
-		zip: 'twentyseventeen.latest-stable.zip',
+			'https://i0.wp.com/themes.svn.wordpress.org/rainfall/1.0.5/screenshot.png?w=572&strip=all',
+		name: 'Rainfall',
+		zip: 'rainfall.latest-stable.zip',
 	},
 	{
-		url: 'https://wp-themes.com/neve',
+		url: 'https://wp-themes.com/raft',
 		thumbnail:
-			'https://i0.wp.com/themes.svn.wordpress.org/neve/3.4.5/screenshot.png?w=572&strip=all',
-		name: 'Neve',
-		zip: 'neve.latest-stable.zip',
+			'https://i0.wp.com/themes.svn.wordpress.org/raft/1.0.5/screenshot.png?w=572&strip=all',
+		name: 'Raft',
+		zip: 'raft.latest-stable.zip',
 	},
 ];
 export const ThemesProvider = ( { children } ) => {
