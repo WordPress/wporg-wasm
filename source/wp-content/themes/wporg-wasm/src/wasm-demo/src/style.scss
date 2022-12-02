@@ -77,22 +77,22 @@ html {
 
 		&.is-active {
 			.wporg-tab-item-list__item-name {
-				color: var(--wp--preset--color--blueberry-1);
+				color: var(--wp--preset--color--charcoal-1);
 			}
 			img {
-				outline-color: var(--wp--preset--color--blueberry-1);
+				outline-color: var(--wp--preset--color--charcoal-1);
 			}
 		}
 
 		&:hover {
 			a {
-				text-decoration-color: var(--wp--preset--color--blueberry-2);
+				text-decoration-color: var(--wp--preset--color--blueberry-1);
 			}
 			.wporg-tab-item-list__item-name {
-				color: var(--wp--preset--color--blueberry-2);
+				color: var(--wp--preset--color--blueberry-1);
 			}
 			img {
-				outline-color: var(--wp--preset--color--blueberry-2);
+				outline-color: var(--wp--preset--color--blueberry-1);
 			}
 		}
 	}
@@ -123,7 +123,7 @@ html {
 		.wporg-tab-item-list__theme-thumbnail {
 			position: relative;
 			width: 100%;
-			outline: 1px solid transparent;
+			outline: 1.5px solid transparent;
 			border-radius: 2px;
 		}
 	}
@@ -134,7 +134,7 @@ html {
 		/* A CSS hack to grow all flexbox lines but the last one*/
 		&:after {
 			content: "";
-			flex: 1 0 100px;
+			flex: 1000000000 0 100px;
 			visibility: hidden;
 		}
 		
@@ -151,10 +151,10 @@ html {
 			flex-grow: 1;
 
 			&.is-active {
-				border-color: var(--wp--preset--color--blueberry-1);
+				border-color: var(--wp--preset--color--charcoal-1);
 			}
 			&:hover {
-				border-color: var(--wp--preset--color--blueberry-2);
+				border-color: var(--wp--preset--color--blueberry-1);
 			}
 		}
 
