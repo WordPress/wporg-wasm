@@ -15,29 +15,25 @@ const STEP_SANDBOX = 'STEP_SANDBOX';
 
 export default () => {
 	const ref = useRef();
-	const [ step, _setStep ] = useState(
+	const [step, _setStep] = useState(
 		() =>
-			new URL( window.location.href ).searchParams.get( 'step' ) ||
-			STEP_SETUP
+			new URL(window.location.href).searchParams.get('step') || STEP_SETUP
 	);
-	function setStep( curStep ) {
-		_setStep( curStep );
+	function setStep(curStep) {
+		_setStep(curStep);
 		window.history.pushState(
 			{},
 			'',
-			safeAddQueryArgs( window.location.href, { curStep } )
+			safeAddQueryArgs(window.location.href, { curStep })
 		);
 	}
 
 	return (
 		<div>
-			{ step === STEP_SETUP && (
-				<SetupStep onSubmit={ () => setStep( STEP_SANDBOX ) } />
-			) }
-			<SandboxStep
-				onClickBack={ () => setStep( STEP_SETUP ) }
-				ref={ ref }
-			/>
+			{step === STEP_SETUP && (
+				<SetupStep onSubmit={() => setStep(STEP_SANDBOX)} />
+			)}
+			<SandboxStep onClickBack={() => setStep(STEP_SETUP)} ref={ref} />
 		</div>
 	);
 };

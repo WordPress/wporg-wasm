@@ -303,4 +303,54 @@ body .is-style-browser-frame {
 			margin-top: 12px;
 		}
 	}
+
+}
+
+.wp-block-create-block-wasm-demo .wpsandbox-url-bar {
+	position: relative;
+	z-index: 1;
+	display: flex;
+	margin-right: auto;
+	margin-left: auto;
+	min-width: 200px;
+	width: 60%;
+	transition: opacity 0.5s ease;
+	opacity: 0;
+
+	&__input-container {
+		display: flex;
+		width: 100%;
+	}
+
+	&__input {
+		flex-grow: 1;
+		padding: 5px 10px;
+
+		font-family: "San Francisco", Helvetica, Arial, sans-serif;
+		font-size: 16px;
+		font-weight: 50;
+		height: 26px;
+		border: 0;
+		background: #40464D;
+		border-radius: 8px;
+		color: #A5AFBC;
+		transition: color 0.5s ease;
+
+		&:focus,
+		&:hover {
+		  color: #FFF;
+		}
+	}
+
+	&__submit {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		left: -100000px;
+		top: -100000px;
+	}
+}
+
+.wporg-demo-browser.is-booted .wpsandbox-url-bar {
+	opacity: 1;
 }
