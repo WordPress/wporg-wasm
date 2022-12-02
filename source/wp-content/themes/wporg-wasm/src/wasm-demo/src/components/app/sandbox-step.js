@@ -51,7 +51,6 @@ export default forwardRef(({ onClickBack }, ref) => {
 
 		// Update the URL bar to always reflect the current state of the Sandbox:
 		window.addEventListener('message', (event) => {
-			console.log(event.data);
 			if (event.data?.type === 'new_path') {
 				setUrl(event.data?.path);
 			}
