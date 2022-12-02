@@ -3,6 +3,7 @@
  */
 import { Button, Flex, FlexItem } from '@wordpress/components';
 import { useRef, forwardRef } from '@wordpress/element';
+import { Icon, settings } from '@wordpress/icons';
 
 /**
  * Internal dependencies
@@ -33,9 +34,15 @@ export default forwardRef( ( { onClickBack }, ref ) => {
 			<Flex className="wporg-demo__viewport-controls">
 				<FlexItem></FlexItem>
 				<FlexItem>
-					<Button onClick={ onClickBack } variant="primary">
-						<span>Settings</span>
-					</Button>
+					<Flex align="center" justify="center">
+						<Button
+							onClick={onClickBack}
+							variant="tertiary"
+							className="wporg-demo__settings-button"
+						>
+							<Icon icon={settings} />
+						</Button>
+					</Flex>
 				</FlexItem>
 			</Flex>
 			<div className="wporg-demo__viewport">
