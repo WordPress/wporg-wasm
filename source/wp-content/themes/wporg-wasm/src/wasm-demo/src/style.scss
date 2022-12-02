@@ -110,6 +110,9 @@ html {
 			transition: outline-color ease-in 0.1s;
 	
 			width: 200px;
+			@media screen and (max-width: 600px) {
+				width: 150px;
+			}
 			flex-grow: 1;
 		}
 
@@ -135,6 +138,9 @@ html {
 
 	&.is-plugin {
 		margin-bottom: 100px;
+		@media screen and (max-width: 600px) {
+			margin-bottom: 60px;
+		}
 
 		/* A CSS hack to grow all flexbox lines but the last one*/
 		&:after {
@@ -176,15 +182,17 @@ html {
 	}
 }
 
+html {
+	margin-top: 0 !important;
+}
+
+#wpadminbar {
+	display: none !important;
+}
+
 // On small screen sizes, make the
 // browser UI full-screen
 @media (max-width: 600px), (max-height: 700px) {
-	html {
-		margin-top: 0 !important;
-	}
-	#wpadminbar {
-		display: none !important;
-	}
 	body .is-style-browser-frame {
 		border: 1px solid #dedede;
 		padding: 0 !important;
@@ -217,16 +225,21 @@ body .is-style-browser-frame {
 		min-height: 40px;;
 	}
 
-	&:after {
-		content: '';
-		position: absolute;
-		left: 24px;
-		top: calc( 50% - 5px);
-		width: 10px;
-		height: 10px;
-		background: #A5AFBC;
-		border-radius: 50%;
-		box-shadow: 20px 0 0 0 #A5AFBC, 40px 0 0 0 #A5AFBC;
+	&__dots {
+		position: relative;
+		width: 70px;
+
+		&:after {
+			content: '';
+			position: absolute;
+			left: 10px;
+			top: calc( 50% - 5px);
+			width: 10px;
+			height: 10px;
+			background: #A5AFBC;
+			border-radius: 50%;
+			box-shadow: 20px 0 0 0 #A5AFBC, 40px 0 0 0 #A5AFBC;
+		}
 	}
 }
 

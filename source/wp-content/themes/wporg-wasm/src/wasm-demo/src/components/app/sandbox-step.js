@@ -70,8 +70,8 @@ export default forwardRef(({ onClickBack }, ref) => {
 
 	return (
 		<div className={className} ref={ref}>
-			<Flex className="wporg-demo__viewport-controls">
-				<FlexItem></FlexItem>
+			<Flex className="wporg-demo__viewport-controls" gap={16}>
+				<FlexItem className="wporg-demo__viewport-controls__dots"></FlexItem>
 				<FlexItem style={{ flexGrow: 1 }}>
 					<form
 						className="wpsandbox-url-bar"
