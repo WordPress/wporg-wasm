@@ -13,18 +13,24 @@ import SandboxStep from './sandbox-step';
 const STEP_SETUP = 'STEP_SETUP';
 const STEP_SANDBOX = 'STEP_SANDBOX';
 
-export default () => {
+export default function WasmDemoApp() {
 	const ref = useRef();
 	const [step, _setStep] = useState(
 		() =>
 			new URL(window.location.href).searchParams.get('step') || STEP_SETUP
 	);
-	function setStep(curStep) {
-		_setStep(curStep);
+	const [bootedAtLeastOnce, setBootedAtLeastOnce] = useState(
+		step === STEP_SANDBOX
+	);
+	function setStep(nextStep) {
+		if (!bootedAtLeastOnce) {
+			setBootedAtLeastOnce(nextStep === STEP_SANDBOX);
+		}
+		_setStep(nextStep);
 		window.history.pushState(
 			{},
 			'',
-			safeAddQueryArgs(window.location.href, { step: curStep })
+			safeAddQueryArgs(window.location.href, { step: nextStep })
 		);
 	}
 
@@ -33,7 +39,12 @@ export default () => {
 			{step === STEP_SETUP && (
 				<SetupStep onSubmit={() => setStep(STEP_SANDBOX)} />
 			)}
-			<SandboxStep onClickBack={() => setStep(STEP_SETUP)} ref={ref} />
+			{bootedAtLeastOnce && (
+				<SandboxStep
+					onClickBack={() => setStep(STEP_SETUP)}
+					ref={ref}
+				/>
+			)}
 		</div>
 	);
-};
+}
