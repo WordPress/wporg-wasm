@@ -24,7 +24,7 @@ export default () => {
 		window.history.pushState(
 			{},
 			'',
-			safeAddQueryArgs(window.location.href, { curStep })
+			safeAddQueryArgs(window.location.href, { step: curStep })
 		);
 	}
 
