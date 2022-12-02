@@ -18,11 +18,12 @@ html {
 .wporg-demo-browser {
 	background-color: #fff;
 	border-radius: 4px;
-	height: calc( 100vh - var(--wp--preset--spacing--60) * 2);
 	display: flex;
     flex: 1;
     flex-direction: column;
-
+	height: calc( 100vh - var(--wp--preset--spacing--60) * 2 - 30px);
+	min-height: 80vh;
+	
 	iframe {
 		border: none;
 		flex-grow: 1
@@ -175,31 +176,33 @@ html {
 	}
 }
 
-@media (max-width: 600px) {
+// On small screen sizes, make the
+// browser UI full-screen
+@media (max-width: 600px), (max-height: 700px) {
 	html {
 		margin-top: 0 !important;
 	}
 	#wpadminbar {
 		display: none !important;
 	}
-}
-@media (max-width: 600px) {
 	body .is-style-browser-frame {
-		padding: 0px !important;
-		margin-top: 5px;
+		border: 1px solud #dedede;
 	}
 	body .is-style-is-browser-frame {
 		padding: 0px !important;
 	}
-	body .wporg-demo-browser {
-		height: 100vh !important;
+	.wporg-demo-browser {
+		height: 100vh;
+	}
+	.wporg-demo__viewport-controls {
+		border-radius: 0 !important;
 	}
 }
 
-@media (max-width: 1200px) {
-	body .is-style-is-browser-frame {
-		padding: 0px !important;
-	}
+// Force-remove the extra padding from the browser frame
+body .is-style-browser-frame {
+	padding-top: 0px !important;
+	padding-bottom: 0px !important;
 }
 
 .wporg-demo__viewport-controls {
