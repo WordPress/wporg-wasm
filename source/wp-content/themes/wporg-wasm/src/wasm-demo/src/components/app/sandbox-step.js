@@ -2,13 +2,7 @@
  * WordPress dependencies
  */
 import { Button, Flex, FlexItem } from '@wordpress/components';
-import {
-	useRef,
-	forwardRef,
-	useState,
-	useEffect,
-	useMemo,
-} from '@wordpress/element';
+import { useRef, forwardRef, useState, useEffect } from '@wordpress/element';
 import { Icon, settings } from '@wordpress/icons';
 
 /**
@@ -28,7 +22,7 @@ export default forwardRef(({ onClickBack }, ref) => {
 	const iframeRef = useRef();
 	const urlInputRef = useRef();
 
-	const queryString = buildQueryString([
+	const sandboxConfigQueryString = buildQueryString([
 		['rpc', '1'],
 		['url', '/'],
 		['mode', 'seamless'],
@@ -71,7 +65,7 @@ export default forwardRef(({ onClickBack }, ref) => {
 		});
 	};
 
-	const iframeUrl = useMemo(() => `${BASE_URL}?${queryString}`, []);
+	const iframeUrl = `${BASE_URL}?${sandboxConfigQueryString}`;
 	const className =
 		'wporg-demo-browser ' + (isBooted ? 'is-booted' : 'is-booting');
 
