@@ -27,11 +27,6 @@ export default () => {
 			'',
 			safeAddQueryArgs( window.location.href, { curStep } )
 		);
-		if ( curStep === STEP_SANDBOX ) {
-			setTimeout( () => {
-				ref.current.scrollIntoView( true );
-			} );
-		}
 	}
 
 	return (

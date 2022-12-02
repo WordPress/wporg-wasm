@@ -182,15 +182,23 @@ html {
 	#wpadminbar {
 		display: none !important;
 	}
-
+}
+@media (max-width: 600px) {
 	body .is-style-browser-frame {
-		padding: 0 !important;
+		padding: 0px !important;
+		margin-top: 5px;
 	}
 	body .is-style-is-browser-frame {
-		padding: 0 !important;
+		padding: 0px !important;
 	}
 	body .wporg-demo-browser {
 		height: 100vh !important;
+	}
+}
+
+@media (max-width: 1200px) {
+	body .is-style-is-browser-frame {
+		padding: 0px !important;
 	}
 }
 
