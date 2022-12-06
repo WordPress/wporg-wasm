@@ -269,12 +269,12 @@ body .is-style-browser-frame {
 .wporg-setup-footer {
 	position: fixed;
 	bottom: 0;
-	left:0;
+    left: 5px;
 
 	display: flex;
     justify-content: flex-end;
 	padding: 1rem;
-    width: 100%;
+    width: calc(100% - 20px);
     box-sizing: border-box;
 
 	background-color: #fff;
