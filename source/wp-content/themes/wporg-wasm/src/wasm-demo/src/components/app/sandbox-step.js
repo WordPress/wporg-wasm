@@ -2,7 +2,8 @@
  * WordPress dependencies
  */
 import { Button, Flex, FlexItem } from '@wordpress/components';
-import { useRef, forwardRef } from '@wordpress/element';
+import { useRef, forwardRef, useState, useEffect } from '@wordpress/element';
+import { Icon, settings } from '@wordpress/icons';
 
 /**
  * Internal dependencies
@@ -13,42 +14,137 @@ import { usePlugins } from '../../hooks/plugins';
 
 const BASE_URL = 'https://wasm.wordpress.net/wordpress.html';
 
-export default forwardRef( ( { onClickBack }, ref ) => {
+export default forwardRef(({ onClickBack }, ref) => {
+	const [url, setUrl] = useState('');
+	const [isBooted, setIsBooted] = useState(false);
 	const { activeTheme } = useThemes();
 	const { activePlugins } = usePlugins();
 	const iframeRef = useRef();
+	const urlInputRef = useRef();
 
-	const queryString = buildQueryString( [
-		[ 'rpc', '1' ],
-		[ 'url', '/wp-admin/' ],
-		[ 'mode', 'seamless' ],
-		[ 'theme', activeTheme.zip ],
-		...activePlugins.map( ( plugin ) => [ 'plugin', plugin.zip ] ),
-	] );
+	const sandboxConfigQueryString = buildQueryString([
+		['rpc', '1'],
+		['url', '/'],
+		['mode', 'seamless'],
+		['theme', activeTheme.zip],
+		...activePlugins.map((plugin) => ['plugin', plugin.zip]),
+	]);
+	useEffect(() => {
+		async function monitorIsBooted() {
+			let _isBooted = false;
+			do {
+				try {
+					_isBooted = await rpcWithResponse(
+						iframeRef.current,
+						'is_booted',
+						{},
+						{ timeout: 50 }
+					);
+				} catch (e) {
+					await new Promise((resolve) => setTimeout(resolve, 50));
+					// ...keep trying
+				}
+			} while (!_isBooted);
+			setIsBooted(true);
+		}
+		monitorIsBooted();
 
-	const url = `${ BASE_URL }?${ queryString }`;
+		// Update the URL bar to always reflect the current state of the Sandbox:
+		window.addEventListener('message', (event) => {
+			if (event.data?.type === 'new_path') {
+				setUrl(event.data?.path);
+			}
+		});
+	}, []);
+
+	const handleUrlSubmit = (e) => {
+		e.preventDefault();
+		rpc(iframeRef.current, 'go_to', {
+			path: url,
+		});
+	};
+
+	const iframeUrl = `${BASE_URL}?${sandboxConfigQueryString}`;
+	const className =
+		'wporg-demo-browser ' + (isBooted ? 'is-booted' : 'is-booting');
 
 	return (
-		<div className="wporg-demo-browser" ref={ ref }>
-			<Flex className="wporg-demo__viewport-controls">
-				<FlexItem></FlexItem>
+		<div className={className} ref={ref}>
+			<Flex className="wporg-demo__viewport-controls" gap={16}>
+				<FlexItem className="wporg-demo__viewport-controls__dots"></FlexItem>
+				<FlexItem style={{ flexGrow: 1 }}>
+					<form
+						className="wpsandbox-url-bar"
+						onSubmit={handleUrlSubmit}
+					>
+						<div className="wpsandbox-url-bar__input-container">
+							<input
+								ref={urlInputRef}
+								value={url}
+								onChange={(e) => setUrl(e.target.value)}
+								type="text"
+								autoComplete="off"
+								className="wpsandbox-url-bar__input"
+							/>
+						</div>
+						<input
+							type="submit"
+							tabIndex="-1"
+							className="wpsandbox-url-bar__submit"
+						/>
+					</form>
+				</FlexItem>
 				<FlexItem>
-					<Button onClick={ onClickBack } variant="primary">
-						<span>Settings</span>
-					</Button>
+					<Flex align="center" justify="center">
+						<Button
+							onClick={onClickBack}
+							variant="tertiary"
+							className="wporg-demo__settings-button"
+						>
+							<Icon icon={settings} />
+						</Button>
+					</Flex>
 				</FlexItem>
 			</Flex>
 			<div className="wporg-demo__viewport">
-				<Iframe src={ url } ref={ iframeRef } />
+				<Iframe src={iframeUrl} ref={iframeRef} />
 			</div>
 		</div>
 	);
-} );
+});
 
-function buildQueryString( params ) {
+function buildQueryString(params) {
 	const esc = encodeURIComponent;
-	const query = params
-		.map( ( [ k, v ] ) => esc( k ) + '=' + esc( v ) )
-		.join( '&' );
+	const query = params.map(([k, v]) => esc(k) + '=' + esc(v)).join('&');
 	return query;
+}
+
+let lastRequestId = 0;
+async function rpcWithResponse(wpIframe, type, data, { timeout = 5000 }) {
+	const requestId = ++lastRequestId;
+	rpc(wpIframe, type, { ...data, requestId }, '*');
+	return await new Promise((resolve, reject) => {
+		async function getResponse(event) {
+			// When `requestId` is present, the other thread expects a response:
+			if (event.data.requestId === requestId) {
+				resolve(event.data?.response);
+				window.removeEventListener('message', getResponse);
+			}
+		}
+		setTimeout(() => {
+			window.removeEventListener('message', getResponse);
+			reject(new Error('RPC request timed out'));
+		}, timeout);
+		window.addEventListener('message', getResponse);
+	});
+}
+
+function rpc(wpIframe, type, data) {
+	wpIframe.contentWindow.postMessage(
+		{
+			type,
+			...data,
+		},
+		'*'
+	);
 }

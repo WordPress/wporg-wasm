@@ -16,141 +16,141 @@ import Checkbox from '../checkbox';
 import { useThemes } from '../../hooks/themes';
 import { usePlugins } from '../../hooks/plugins';
 
-export default ( { onSubmit } ) => {
+export default function SetupStep({ onSubmit }) {
 	const { themes, activeTheme, setActiveTheme } = useThemes();
 	const { plugins, activePlugins, toggleActivePlugin } = usePlugins();
 
 	return (
 		<Modal
-			isFullScreen={ true }
-			title="In-Browser WordPress"
-			onRequestClose={ onSubmit }
+			isFullScreen={false}
+			title="WordPress Sandbox"
+			onRequestClose={onSubmit}
 			className="wporg-setup-modal"
 		>
 			<p>
-				Welcome to a new and exciting way fo testing WordPress Themes
-				and Plugins all with your browser! To get started choose a theme
-				and a collection of plugins.{ ' ' }
+				Welcome to a new and exciting way of testing WordPress Themes
+				and Plugins. Choose a theme, sprinkle with a plugin or a few,
+				and start a new WordPress Sandbox – all inside of your browser!
 			</p>
 
-			<Flex wrap={ true }>
+			<Flex wrap={true}>
 				<FlexItem>
-					<h4 className="wporg-section-title">1. Select a theme</h4>
+					<h4 className="wporg-setup-modal__section-title">
+						Select a theme
+					</h4>
 					<Flex
 						as="ul"
 						justify="flex-start"
 						className="wporg-tab-item-list is-theme"
-						wrap={ true }
-						gap="16px"
+						wrap={true}
+						gap="24px"
 					>
-						{ themes.map( ( theme ) => (
+						{themes.map((theme) => (
 							<FlexItem
 								as="li"
-								key={ theme.name }
+								key={theme.name}
 								className={
 									'wporg-tab-item-list-item ' +
-									( activeTheme === theme ? 'is-active' : '' )
+									(activeTheme === theme ? 'is-active' : '')
 								}
-								onClick={ () => setActiveTheme( theme ) }
+								onClick={() => setActiveTheme(theme)}
 							>
 								<a
-									href={ theme.url }
-									onClick={ ( event ) =>
-										event.preventDefault()
-									}
+									href={theme.url}
+									onClick={(event) => event.preventDefault()}
 								>
 									<Flex
 										align="flex-start"
 										direction="column"
-										gap={ 0 }
+										gap={0}
 									>
 										<FlexItem>
-											<img
-												src={ theme.thumbnail }
-												alt={ theme.name }
-											/>
+											<div className="wporg-tab-item-list__theme-thumbnail-wrapper">
+												<img
+													className="wporg-tab-item-list__theme-thumbnail"
+													src={theme.thumbnail}
+													alt={theme.name}
+												/>
+											</div>
 										</FlexItem>
 										<FlexBlock
 											as="h3"
 											className="wporg-tab-item-list__item-name"
 										>
-											{ theme.name }
+											{theme.name}
 										</FlexBlock>
 									</Flex>
 								</a>
 								<div className="wporg-tab-item-list__overlay" />
 							</FlexItem>
-						) ) }
+						))}
 					</Flex>
 
-					<h4 className="wporg-section-title">
-						2. Add a few plugins
+					<h4 className="wporg-setup-modal__section-title">
+						Add plugins
 					</h4>
 					<Flex
 						className="wporg-tab-item-list is-plugin"
 						justify="flex-start"
-						wrap={ true }
+						wrap={true}
 						gap="8px"
 					>
-						{ plugins.map( ( plugin ) => (
+						{plugins.map((plugin) => (
 							<FlexItem
-								key={ plugin.zip }
+								key={plugin.zip}
 								className={
 									'wporg-tab-item-list-item ' +
-									( activePlugins.includes( plugin )
+									(activePlugins.includes(plugin)
 										? 'is-active'
-										: '' )
+										: '')
 								}
-								onClick={ () => toggleActivePlugin( plugin ) }
+								onClick={() => toggleActivePlugin(plugin)}
 							>
 								<a
-									href={ plugin.url }
-									onClick={ ( event ) =>
-										event.preventDefault()
-									}
+									href={plugin.url}
+									onClick={(event) => event.preventDefault()}
 								>
 									<Flex
 										align="center"
 										direction="row"
-										gap={ 2 }
+										gap={2}
 									>
 										<FlexItem>
 											<img
-												src={ plugin.icon }
-												alt={ plugin.name }
+												src={plugin.icon}
+												alt={plugin.name}
 											/>
 										</FlexItem>
 										<FlexBlock
 											as="h3"
 											className="wporg-tab-item-list__item-name"
 										>
-											{ plugin.name }
+											{plugin.name}
 										</FlexBlock>
 										<FlexItem>
 											<Checkbox
-												checked={ activePlugins.includes(
+												checked={activePlugins.includes(
 													plugin
-												) }
+												)}
 											/>
 										</FlexItem>
 									</Flex>
 								</a>
-								<div className="wporg-tab-item-list__overlay" />
 							</FlexItem>
-						) ) }
+						))}
 					</Flex>
 
 					<div className="wporg-setup-footer">
 						<Button
 							isPrimary
 							className="wporg-tab-item-list__confirm"
-							onClick={ onSubmit }
+							onClick={onSubmit}
 						>
-							Start Your Sandbox!
+							Start Sandbox
 						</Button>
 					</div>
 				</FlexItem>
 			</Flex>
 		</Modal>
 	);
-};
+}
