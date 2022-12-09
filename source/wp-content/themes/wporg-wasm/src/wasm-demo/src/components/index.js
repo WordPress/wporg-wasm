@@ -3,6 +3,7 @@
  */
 import App from './app';
 import '../../node_modules/@wordpress/components/build-style/style.css';
+import './style.scss';
 import { ThemesProvider } from '../hooks/themes';
 import { PluginsProvider } from '../hooks/plugins';
 

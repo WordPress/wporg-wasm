@@ -47,7 +47,7 @@ function register_assets() {
 
 	$block_info = require $deps_path;
 
-	if ( ! is_admin() ) {
+	if ( ! is_admin() && is_page( 'demo' ) ) {
 		wp_enqueue_style(
 			'wporg-component-style',
 			get_stylesheet_directory_uri() . '/src/wasm-demo/build/style-front.css',
