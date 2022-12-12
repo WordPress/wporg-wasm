@@ -16,7 +16,6 @@
 namespace WordPressdotorg\WordPressWasm\DemoBlock;
 
 add_action( 'init', __NAMESPACE__ .'\create_block_wasm_demo_block_init' );
-add_action( 'wp_enqueue_scripts', __NAMESPACE__ . '\register_assets', 20 );
 
  /**
  * Renders block on the server.
@@ -39,28 +38,6 @@ function render_block( $attributes, $content ) {
 		$wrapper_attributes,
 		$block_attributes,
 	);
-}
-
-/**
- * Register scripts, styles, and block.
- */
-function register_assets() {
-	$deps_path = __DIR__ . '/build/index.asset.php';
-	
-	if ( ! file_exists( $deps_path ) ) {
-		return;
-	}
-
-	$block_info = require $deps_path;
-
-	if ( ! is_admin() && is_page( 'demo' ) ) {
-		wp_enqueue_style(
-			'wporg-component-style',
-			get_stylesheet_directory_uri() . '/src/wasm-demo/build/style-front.css',
-			array(),
-			filemtime( __DIR__ . '/build/style-front.css' )
-		);
-	}
 }
 
 /**

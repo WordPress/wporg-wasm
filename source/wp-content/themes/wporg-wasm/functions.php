@@ -19,7 +19,7 @@ function enqueue_assets() {
 	wp_enqueue_style(
 		'wporg-wasm-style',
 		get_stylesheet_directory_uri() . '/style.css',
-		array( 'wporg-parent-2021-style' ),
+		array( 'wporg-parent-2021-style', 'wp-components' ),
 		filemtime( __DIR__ . '/style.css' )
 	);
 	wp_style_add_data( 'wporg-wasm-style', 'rtl', 'replace' );

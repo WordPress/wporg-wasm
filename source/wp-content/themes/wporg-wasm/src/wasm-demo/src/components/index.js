@@ -12,7 +12,6 @@ import { availablePlugins } from './settings/use-plugins-chooser';
 import { availableThemes } from './settings/use-themes-chooser';
 import Sandbox from './sandbox';
 
-import '../../node_modules/@wordpress/components/build-style/style.css';
 import '../style.scss';
 
 const STEP_SETTINGS = 'settings';
@@ -60,7 +59,9 @@ function useSandboxSettings(blockAttributes) {
 		const initialPlugins = attributeSet.plugins || [];
 
 		return {
-			step: attributeSet.step || STEP_SETTINGS,
+			step: [STEP_SANDBOX, STEP_SETTINGS].includes(attributeSet.step)
+				? attributeSet.step
+				: STEP_SETTINGS,
 			theme:
 				availableThemes.find(
 					(t) =>

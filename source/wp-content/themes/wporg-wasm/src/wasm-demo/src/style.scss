@@ -1,8 +1,3 @@
-
-html {
-	--wp-global-header-height: 0px !important;
-}
-
 @mixin default-font {
 	font-size: 14px;
 	font-family: -apple-system, BlinkMacSystemFont, sans-serif;
@@ -15,8 +10,8 @@ html {
 	display: flex;
     flex: 1;
     flex-direction: column;
-	height: calc( 100vh - var(--wp--preset--spacing--60) * 2 - 30px);
-	min-height: 80vh;
+	height: 700px;
+	max-height: 90vh;
 	
 	iframe {
 		border: none;
@@ -172,13 +167,19 @@ html {
 	}
 }
 
-html {
+html.wporg-wasm-demo-page {
 	margin-top: 0 !important;
+	#wpadminbar {
+		display: none !important;
+	}
+	html {
+		--wp-global-header-height: 0px !important;
+	}
+	.wporg-demo-browser {
+		height: calc( 100vh - var(--wp--preset--spacing--60) * 2 - 30px);
+	}
 }
 
-#wpadminbar {
-	display: none !important;
-}
 
 // On small screen sizes, make the
 // browser UI full-screen
@@ -212,7 +213,7 @@ body .is-style-browser-frame {
 	border-radius: 4px 4px 0 0;
 
 	@media (max-width: 600px) {
-		min-height: 40px;;
+		min-height: 40px;
 	}
 
 	&__dots {
@@ -281,6 +282,8 @@ body .is-style-browser-frame {
 }
 
 .components-modal__frame.wporg-setup-modal {
+	max-height: 85%;
+	
 	@media (max-width: 600px), (max-height: 800px) {
 		width: 100vw;
 		height: 100vh;

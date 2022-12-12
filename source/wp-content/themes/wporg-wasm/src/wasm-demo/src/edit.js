@@ -26,12 +26,6 @@ import './editor.scss';
  * The edit function describes the structure of your block in the context of the
  * editor. This represents what the editor will render when the block is used.
  *
- * @param  root0
- * @param  root0.attributes
- * @param  root0.attributes.step
- * @param  root0.attributes.theme
- * @param  root0.attributes.plugins
- * @param  root0.setAttributes
  * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-edit-save/#edit
  *
  * @return {WPElement} Element to render.
