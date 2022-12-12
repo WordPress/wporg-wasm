@@ -7,24 +7,37 @@ import {
 	FlexItem,
 	Modal,
 	Button,
+	CheckboxControl,
 } from '@wordpress/components';
 
 /**
  * Internal dependencies
  */
-import Checkbox from '../checkbox';
-import { useThemes } from '../../hooks/themes';
-import { usePlugins } from '../../hooks/plugins';
+import { usePluginsChooser } from './use-plugins-chooser';
+import { useThemesChooser } from './use-themes-chooser';
 
-export default function SetupStep({ onSubmit }) {
-	const { themes, activeTheme, setActiveTheme } = useThemes();
-	const { plugins, activePlugins, toggleActivePlugin } = usePlugins();
+export default function SettingsModal({
+	onSubmit,
+	initialTheme,
+	initialPlugins,
+}) {
+	const { availableThemes, activeTheme, setActiveTheme } =
+		useThemesChooser(initialTheme);
+	const { availablePlugins, activePlugins, toggleActivePlugin } =
+		usePluginsChooser(initialPlugins);
+
+	const handleSubmit = (event) => {
+		if (event?.preventDefault) {
+			event.preventDefault();
+		}
+		onSubmit({ theme: activeTheme, plugins: activePlugins });
+	};
 
 	return (
 		<Modal
 			isFullScreen={false}
 			title="WordPress Sandbox"
-			onRequestClose={onSubmit}
+			onRequestClose={handleSubmit}
 			className="wporg-setup-modal"
 		>
 			<p>
@@ -45,7 +58,7 @@ export default function SetupStep({ onSubmit }) {
 						wrap={true}
 						gap="24px"
 					>
-						{themes.map((theme) => (
+						{availableThemes.map((theme) => (
 							<FlexItem
 								as="li"
 								key={theme.name}
@@ -86,7 +99,10 @@ export default function SetupStep({ onSubmit }) {
 						))}
 					</Flex>
 
-					<h4 className="wporg-setup-modal__section-title">
+					<h4
+						className="wporg-setup-modal__section-title"
+						style={{ marginTop: -20 }}
+					>
 						Add plugins
 					</h4>
 					<Flex
@@ -95,7 +111,7 @@ export default function SetupStep({ onSubmit }) {
 						wrap={true}
 						gap="8px"
 					>
-						{plugins.map((plugin) => (
+						{availablePlugins.map((plugin) => (
 							<FlexItem
 								key={plugin.zip}
 								className={
@@ -106,36 +122,29 @@ export default function SetupStep({ onSubmit }) {
 								}
 								onClick={() => toggleActivePlugin(plugin)}
 							>
-								<a
-									href={plugin.url}
-									onClick={(event) => event.preventDefault()}
-								>
-									<Flex
-										align="center"
-										direction="row"
-										gap={2}
+								<Flex align="center" direction="row" gap={2}>
+									<FlexItem>
+										<img
+											src={plugin.icon}
+											alt={plugin.name}
+										/>
+									</FlexItem>
+									<FlexBlock
+										as="h3"
+										className="wporg-tab-item-list__item-name"
 									>
-										<FlexItem>
-											<img
-												src={plugin.icon}
-												alt={plugin.name}
-											/>
-										</FlexItem>
-										<FlexBlock
-											as="h3"
-											className="wporg-tab-item-list__item-name"
-										>
-											{plugin.name}
-										</FlexBlock>
-										<FlexItem>
-											<Checkbox
-												checked={activePlugins.includes(
-													plugin
-												)}
-											/>
-										</FlexItem>
-									</Flex>
-								</a>
+										{plugin.name}
+									</FlexBlock>
+									<FlexItem>
+										<CheckboxControl
+											label=""
+											checked={activePlugins.includes(
+												plugin
+											)}
+											onChange={() => {}}
+										/>
+									</FlexItem>
+								</Flex>
 							</FlexItem>
 						))}
 					</Flex>
@@ -144,7 +153,7 @@ export default function SetupStep({ onSubmit }) {
 						<Button
 							isPrimary
 							className="wporg-tab-item-list__confirm"
-							onClick={onSubmit}
+							onClick={handleSubmit}
 						>
 							Start Sandbox
 						</Button>

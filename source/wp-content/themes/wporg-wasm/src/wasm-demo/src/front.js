@@ -9,12 +9,15 @@ import { render } from '@wordpress/element';
 import App from './components/index.js';
 
 const init = () => {
-	const domElement = document.getElementById( 'wporg-wasm-demo' );
-	if ( ! domElement ) {
+	const domElement = document.getElementById('wporg-wasm-demo');
+	if (!domElement) {
 		return;
 	}
 
-	render( <App />, domElement );
+	const blockAttributes = Object.fromEntries(
+		Object.entries(domElement.dataset)
+	);
+	render(<App blockAttributes={blockAttributes} />, domElement);
 };
 
-document.addEventListener( 'DOMContentLoaded', init );
+document.addEventListener('DOMContentLoaded', init);

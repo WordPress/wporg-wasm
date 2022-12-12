@@ -56,11 +56,9 @@ html {
 	.wporg-tab-item-list-item {
 		cursor: pointer;
 
-		a {
-			color: #1e1e1e;
-			line-height: 14px;
-			text-decoration: none;
-		}
+		color: #1e1e1e;
+		line-height: 14px;
+		text-decoration: none;
 	
 		.wporg-tab-item-list__item-name {
 			@include default-font;
@@ -84,9 +82,7 @@ html {
 		}
 
 		&:hover {
-			a {
-				text-decoration-color: var(--wp--preset--color--blueberry-1);
-			}
+			text-decoration-color: var(--wp--preset--color--blueberry-1);
 			.wporg-tab-item-list__item-name {
 				color: var(--wp--preset--color--blueberry-1);
 			}

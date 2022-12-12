@@ -29,9 +29,15 @@ add_action( 'wp_enqueue_scripts', __NAMESPACE__ . '\register_assets', 20 );
  */
 function render_block( $attributes, $content ) {
 	$wrapper_attributes = get_block_wrapper_attributes();
+	$block_attributes = '';
+	foreach($attributes as $name => $value) {
+		$block_attributes .= 'data-' . $name . '="' . esc_attr($value) . '" ';
+	}
+	
 	return sprintf(
-		'<div id="wporg-wasm-demo" %s></div>',
+		'<div id="wporg-wasm-demo" %s %s></div>',
 		$wrapper_attributes,
+		$block_attributes,
 	);
 }
 

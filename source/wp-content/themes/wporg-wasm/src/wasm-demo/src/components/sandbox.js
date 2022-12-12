@@ -8,17 +8,14 @@ import { Icon, settings } from '@wordpress/icons';
 /**
  * Internal dependencies
  */
-import Iframe from '../iframe';
-import { useThemes } from '../../hooks/themes';
-import { usePlugins } from '../../hooks/plugins';
+import Iframe from './iframe';
 
-const BASE_URL = 'https://wasm.wordpress.net/wordpress.html';
+// const BASE_URL = 'https://wasm.wordpress.net/wordpress.html';
+const BASE_URL = 'http://127.0.0.1:8777/wordpress.html';
 
-export default forwardRef(({ onClickBack }, ref) => {
+export default forwardRef(({ showSettingsModal, theme, plugins }, ref) => {
 	const [url, setUrl] = useState('');
 	const [isBooted, setIsBooted] = useState(false);
-	const { activeTheme } = useThemes();
-	const { activePlugins } = usePlugins();
 	const iframeRef = useRef();
 	const urlInputRef = useRef();
 
@@ -26,8 +23,8 @@ export default forwardRef(({ onClickBack }, ref) => {
 		['rpc', '1'],
 		['url', '/'],
 		['mode', 'seamless'],
-		['theme', activeTheme.zip],
-		...activePlugins.map((plugin) => ['plugin', plugin.zip]),
+		['theme', theme.zip],
+		...plugins.map((plugin) => ['plugin', plugin.zip]),
 	]);
 	useEffect(() => {
 		async function monitorIsBooted() {
@@ -97,7 +94,7 @@ export default forwardRef(({ onClickBack }, ref) => {
 				<FlexItem>
 					<Flex align="center" justify="center">
 						<Button
-							onClick={onClickBack}
+							onClick={showSettingsModal}
 							variant="tertiary"
 							className="wporg-demo__settings-button"
 						>
