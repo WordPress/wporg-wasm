@@ -13,7 +13,7 @@ import { availableThemes } from './settings/use-themes-chooser';
 import Sandbox from './sandbox';
 
 import '../../node_modules/@wordpress/components/build-style/style.css';
-import './style.scss';
+import '../style.scss';
 
 const STEP_SETTINGS = 'settings';
 const STEP_SANDBOX = 'sandbox';
