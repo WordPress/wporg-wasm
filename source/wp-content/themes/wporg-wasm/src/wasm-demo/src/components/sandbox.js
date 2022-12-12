@@ -10,8 +10,7 @@ import { Icon, settings } from '@wordpress/icons';
  */
 import Iframe from './iframe';
 
-// const BASE_URL = 'https://wasm.wordpress.net/wordpress.html';
-const BASE_URL = 'http://127.0.0.1:8777/wordpress.html';
+const BASE_URL = 'https://wasm.wordpress.net/wordpress.html';
 
 export default forwardRef(({ showSettingsModal, theme, plugins }, ref) => {
 	const [url, setUrl] = useState('');
