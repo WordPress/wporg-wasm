@@ -14,5 +14,20 @@
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",
 	"style": "file:./style-index.css",
-	"viewScript": "file:./front.js"
+	"viewScript": "file:./front.js",
+	"attributes": {
+		"step": {
+			"type": "string",
+			"enum": [ "settings", "sandbox" ],
+			"default": "settings"
+		},
+		"theme": {
+			"type": "string",
+			"default": ""
+		},
+		"plugins": {
+			"type": "string",
+			"default": ""
+		}
+	}
 }
