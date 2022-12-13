@@ -21,8 +21,6 @@
 	.wporg-demo__settings-button {
 		color: #FFF !important;
 	}
-
-	animation: pulse 6s ease-in infinite;
 }
 
 @keyframes pulse {
@@ -177,6 +175,13 @@ html.wporg-wasm-demo-page {
 	}
 	.wporg-demo-browser {
 		height: calc( 100vh - var(--wp--preset--spacing--60) * 2 - 30px);
+		animation: pulse 6s ease-in infinite;
+	}
+}
+
+html:not(.wporg-wasm-demo-page) {
+	.wporg-demo-browser {
+		box-shadow: 0 4px 44px rgba(13, 32, 117, 0.5), 0 0 0 0 rgba(13, 32, 117, 0.5);
 	}
 }
 
@@ -282,7 +287,7 @@ body .is-style-browser-frame {
 }
 
 .components-modal__frame.wporg-setup-modal {
-	max-height: 85%;
+	max-height: 95%;
 	
 	@media (max-width: 600px), (max-height: 800px) {
 		width: 100vw;
@@ -313,7 +318,7 @@ body .is-style-browser-frame {
 
 }
 
-.wp-block-create-block-wasm-demo .wpsandbox-url-bar {
+.wp-block-create-block-wasm-demo .wpplayground-url-bar {
 	position: relative;
 	z-index: 1;
 	display: flex;
@@ -358,6 +363,6 @@ body .is-style-browser-frame {
 	}
 }
 
-.wporg-demo-browser.is-booted .wpsandbox-url-bar {
+.wporg-demo-browser.is-booted .wpplayground-url-bar {
 	opacity: 1;
 }

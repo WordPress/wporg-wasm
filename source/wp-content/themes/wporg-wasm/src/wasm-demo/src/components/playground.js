@@ -18,7 +18,7 @@ export default forwardRef(({ showSettingsModal, theme, plugins }, ref) => {
 	const iframeRef = useRef();
 	const urlInputRef = useRef();
 
-	const sandboxConfigQueryString = buildQueryString([
+	const playgroundConfigQueryString = buildQueryString([
 		['rpc', '1'],
 		['url', '/'],
 		['mode', 'seamless'],
@@ -45,7 +45,7 @@ export default forwardRef(({ showSettingsModal, theme, plugins }, ref) => {
 		}
 		monitorIsBooted();
 
-		// Update the URL bar to always reflect the current state of the Sandbox:
+		// Update the URL bar to always reflect the current state of the Playground:
 		window.addEventListener('message', (event) => {
 			if (event.data?.type === 'new_path') {
 				setUrl(event.data?.path);
@@ -60,7 +60,7 @@ export default forwardRef(({ showSettingsModal, theme, plugins }, ref) => {
 		});
 	};
 
-	const iframeUrl = `${BASE_URL}?${sandboxConfigQueryString}`;
+	const iframeUrl = `${BASE_URL}?${playgroundConfigQueryString}`;
 	const className =
 		'wporg-demo-browser ' + (isBooted ? 'is-booted' : 'is-booting');
 
@@ -70,23 +70,23 @@ export default forwardRef(({ showSettingsModal, theme, plugins }, ref) => {
 				<FlexItem className="wporg-demo__viewport-controls__dots"></FlexItem>
 				<FlexItem style={{ flexGrow: 1 }}>
 					<form
-						className="wpsandbox-url-bar"
+						className="wpplayground-url-bar"
 						onSubmit={handleUrlSubmit}
 					>
-						<div className="wpsandbox-url-bar__input-container">
+						<div className="wpplayground-url-bar__input-container">
 							<input
 								ref={urlInputRef}
 								value={url}
 								onChange={(e) => setUrl(e.target.value)}
 								type="text"
 								autoComplete="off"
-								className="wpsandbox-url-bar__input"
+								className="wpplayground-url-bar__input"
 							/>
 						</div>
 						<input
 							type="submit"
 							tabIndex="-1"
-							className="wpsandbox-url-bar__submit"
+							className="wpplayground-url-bar__submit"
 						/>
 					</form>
 				</FlexItem>
