@@ -10,17 +10,17 @@ import safeAddQueryArgs from '../safe-add-query-args';
 import SettingsModal from './settings/settings-modal';
 import { availablePlugins } from './settings/use-plugins-chooser';
 import { availableThemes } from './settings/use-themes-chooser';
-import Sandbox from './sandbox';
+import Playground from './playground';
 
 import '../style.scss';
 
 const STEP_SETTINGS = 'settings';
-const STEP_SANDBOX = 'sandbox';
+const STEP_PLAYGROUND = 'playground';
 
 export default function WasmDemoApp({ blockAttributes }) {
 	const ref = useRef();
 	const { settings, bootedAtLeastOnce, updateSettings, openSettingsModal } =
-		useSandboxSettings(blockAttributes);
+		usePlaygroundSettings(blockAttributes);
 
 	return (
 		<div>
@@ -32,7 +32,7 @@ export default function WasmDemoApp({ blockAttributes }) {
 				/>
 			)}
 			{bootedAtLeastOnce && (
-				<Sandbox
+				<Playground
 					ref={ref}
 					theme={settings.theme}
 					plugins={settings.plugins}
@@ -43,7 +43,7 @@ export default function WasmDemoApp({ blockAttributes }) {
 	);
 }
 
-function useSandboxSettings(blockAttributes) {
+function usePlaygroundSettings(blockAttributes) {
 	const [settings, setSettings] = useState(() => {
 		const searchParams = new URL(window.location.href).searchParams;
 		const query = {
@@ -52,16 +52,17 @@ function useSandboxSettings(blockAttributes) {
 			plugins: searchParams.getAll('plugin'),
 		};
 		const attributeSet =
-			query.step || query.theme || query.plugins
+			query.step || query.theme || query.plugins?.length
 				? query
 				: blockAttributes;
+
 		const initialTheme = attributeSet.theme || '';
 		const initialPlugins = attributeSet.plugins || [];
 
 		return {
-			step: [STEP_SANDBOX, STEP_SETTINGS].includes(attributeSet.step)
+			step: [STEP_PLAYGROUND, STEP_SETTINGS].includes(attributeSet.step)
 				? attributeSet.step
-				: STEP_SETTINGS,
+				: STEP_PLAYGROUND,
 			theme:
 				availableThemes.find(
 					(t) =>
@@ -82,17 +83,17 @@ function useSandboxSettings(blockAttributes) {
 	}, []);
 
 	const [bootedAtLeastOnce, setBootedAtLeastOnce] = useState(
-		settings.step === STEP_SANDBOX
+		settings.step === STEP_PLAYGROUND
 	);
 	function handleUpdateSettings({ theme, plugins }) {
 		setBootedAtLeastOnce(true);
 		setSettings({
-			step: STEP_SANDBOX,
+			step: STEP_PLAYGROUND,
 			theme,
 			plugins,
 		});
 		updateUrlParams({
-			step: STEP_SANDBOX,
+			step: STEP_PLAYGROUND,
 			theme: theme.zip,
 			plugin: plugins.map((p) => p.zip),
 		});

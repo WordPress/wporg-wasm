@@ -49,8 +49,9 @@ function render_block( $attributes, $content ) {
  */
 function create_block_wasm_demo_block_init() {
 	register_block_type( 
-		__DIR__ . '/build',
-	array(
-		'render_callback' => __NAMESPACE__ . '\render_block',
-	) );
+		__DIR__ . '/build/block.json',
+		array(
+			'render_callback' => __NAMESPACE__ . '\render_block',
+		)
+	);
 }

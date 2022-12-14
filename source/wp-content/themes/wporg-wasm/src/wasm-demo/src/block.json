@@ -18,8 +18,7 @@
 	"attributes": {
 		"step": {
 			"type": "string",
-			"enum": [ "settings", "sandbox" ],
-			"default": "settings"
+			"enum": [ "settings", "playground" ]
 		},
 		"theme": {
 			"type": "string",

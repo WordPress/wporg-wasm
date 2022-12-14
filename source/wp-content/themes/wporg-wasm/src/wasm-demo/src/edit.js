@@ -37,13 +37,13 @@ export default function Edit({
 	return (
 		<>
 			<InspectorControls>
-				<PanelBody title={__('Sandbox setup', 'wasm-demo')}>
+				<PanelBody title={__('Playground setup', 'wasm-demo')}>
 					<RadioControl
-						label={__('Step', 'wasm-demo')}
+						label={__('Initial state', 'wasm-demo')}
 						selected={step}
 						options={[
-							{ label: 'Setup', value: 'setup' },
-							{ label: 'Sandbox', value: 'sandbox' },
+							{ label: 'Settings', value: 'settings' },
+							{ label: 'Playground', value: 'playground' },
 						]}
 						onChange={(value) => setAttributes({ step: value })}
 					/>

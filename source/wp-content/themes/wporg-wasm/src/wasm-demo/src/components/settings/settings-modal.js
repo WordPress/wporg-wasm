@@ -36,14 +36,14 @@ export default function SettingsModal({
 	return (
 		<Modal
 			isFullScreen={false}
-			title="WordPress Sandbox"
+			title="WordPress Playground"
 			onRequestClose={handleSubmit}
 			className="wporg-setup-modal"
 		>
 			<p>
 				Welcome to a new and exciting way of testing WordPress Themes
 				and Plugins. Choose a theme, sprinkle with a plugin or a few,
-				and start a new WordPress Sandbox – all inside of your browser!
+				and start a new WordPress Playground – all inside of your browser!
 			</p>
 
 			<Flex wrap={true}>
@@ -155,7 +155,7 @@ export default function SettingsModal({
 							className="wporg-tab-item-list__confirm"
 							onClick={handleSubmit}
 						>
-							Start Sandbox
+							Start Playground
 						</Button>
 					</div>
 				</FlexItem>
