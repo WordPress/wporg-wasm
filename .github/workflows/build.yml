@@ -25,6 +25,15 @@ jobs:
                   cd source/wp-content/themes/wporg-wasm/src/wasm-demo/
                   yarn
                   yarn build
+                  
+            - name: Trim the repo down to just the theme
+              run: |
+                  rm -rf source/wp-content/themes/wporg-wasm/node_modules
+                  rm -rf source/wp-content/themes/wporg-wasm/src/wasm-demo/node_modules
+                  mv source/wp-content/themes/wporg-wasm $RUNNER_TEMP
+                  git rm -rfq .
+                  rm -rf *
+                  mv $RUNNER_TEMP/wporg-wasm/* .
 
             - name: Add all the theme files
               run: |
