@@ -21,7 +21,10 @@ jobs:
                   yarn
 
             - name: Build
-              run: cd source/wp-content/themes/wporg-wasm/src/wasm-demo/ && yarn build
+              run: |
+                  cd source/wp-content/themes/wporg-wasm/src/wasm-demo/
+                  yarn
+                  yarn build
 
             - name: Add all the theme files
               run: |
