@@ -30,11 +30,6 @@ export const availablePlugins = [
 		icon: 'https://ps.w.org/classic-editor/assets/icon-256x256.png',
 	},
 	{
-		name: 'Yoast SEO',
-		zip: 'wordpress-seo',
-		icon: 'https://ps.w.org/wordpress-seo/assets/icon-256x256.png',
-	},
-	{
 		name: 'Duplicate Page',
 		zip: 'duplicate-page',
 		icon: 'https://ps.w.org/duplicate-page/assets/icon-128x128.jpg',
@@ -43,11 +38,6 @@ export const availablePlugins = [
 		name: 'Ultimate Blocks',
 		zip: 'ultimate-blocks',
 		icon: 'https://ps.w.org/ultimate-blocks/assets/icon-256x256.png',
-	},
-	{
-		name: 'Advanced Custom Fields',
-		zip: 'advanced-custom-fields',
-		icon: 'https://ps.w.org/advanced-custom-fields/assets/icon-256x256.png',
 	},
 ];
 
