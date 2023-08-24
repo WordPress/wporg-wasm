@@ -48,9 +48,9 @@ export default function SettingsModal({
 
 			<Flex wrap={true}>
 				<FlexItem>
-					<h4 className="wporg-setup-modal__section-title">
+					<h2 className="wporg-setup-modal__section-title">
 						Select a theme
-					</h4>
+					</h2>
 					<Flex
 						as="ul"
 						justify="flex-start"
@@ -99,12 +99,12 @@ export default function SettingsModal({
 						))}
 					</Flex>
 
-					<h4
+					<h2
 						className="wporg-setup-modal__section-title"
 						style={{ marginTop: -20 }}
 					>
 						Add plugins
-					</h4>
+					</h2>
 					<Flex
 						className="wporg-tab-item-list is-plugin"
 						justify="flex-start"
