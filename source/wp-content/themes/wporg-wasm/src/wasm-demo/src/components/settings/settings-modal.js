@@ -113,40 +113,47 @@ export default function SettingsModal({
 						gap="8px"
 					>
 						{availablePlugins.map((plugin) => (
-							<FlexItem
-								key={plugin.zip}
-								className={
-									'wporg-tab-item-list-item ' +
-									(activePlugins.includes(plugin)
-										? 'is-active'
-										: '')
-								}
-								onClick={() => toggleActivePlugin(plugin)}
-							>
-								<Flex align="center" direction="row" gap={2}>
-									<FlexItem>
-										<img
-											src={plugin.icon}
-											alt={plugin.name}
-										/>
-									</FlexItem>
-									<FlexBlock
-										as="h3"
-										className="wporg-tab-item-list__item-name"
+							<label>
+								<FlexItem
+									key={plugin.zip}
+									className={
+										'wporg-tab-item-list-item ' +
+										(activePlugins.includes(plugin)
+											? 'is-active'
+											: '')
+									}
+								>
+									{' '}
+									<Flex
+										align="center"
+										direction="row"
+										gap={2}
 									>
-										{plugin.name}
-									</FlexBlock>
-									<FlexItem>
-										<CheckboxControl
-											label={plugin.name}
-											checked={activePlugins.includes(
-												plugin
-											)}
-											onChange={() => {}}
-										/>
-									</FlexItem>
-								</Flex>
-							</FlexItem>
+										<FlexItem>
+											<img
+												src={plugin.icon}
+												alt={plugin.name}
+											/>
+										</FlexItem>
+										<FlexBlock
+											as="h3"
+											className="wporg-tab-item-list__item-name"
+										>
+											{plugin.name}
+										</FlexBlock>
+										<FlexItem>
+											<CheckboxControl
+												checked={activePlugins.includes(
+													plugin
+												)}
+												onChange={() =>
+													toggleActivePlugin(plugin)
+												}
+											/>
+										</FlexItem>
+									</Flex>
+								</FlexItem>
+							</label>
 						))}
 					</Flex>
 
