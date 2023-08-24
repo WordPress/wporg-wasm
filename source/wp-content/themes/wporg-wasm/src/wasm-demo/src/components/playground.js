@@ -4,6 +4,7 @@
 import { Button, Flex, FlexItem } from '@wordpress/components';
 import { useRef, forwardRef, useState, useEffect } from '@wordpress/element';
 import { Icon, settings } from '@wordpress/icons';
+import { __ } from '@wordpress/i18n';
 
 /**
  * Internal dependencies
@@ -96,6 +97,7 @@ export default forwardRef(({ showSettingsModal, theme, plugins }, ref) => {
 							onClick={showSettingsModal}
 							variant="tertiary"
 							className="wporg-demo__settings-button"
+							aria-label={__('Settings', 'wasm-demo')}
 						>
 							<Icon icon={settings} />
 						</Button>
