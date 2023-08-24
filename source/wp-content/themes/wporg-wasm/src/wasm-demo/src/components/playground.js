@@ -4,6 +4,7 @@
 import { Button, Flex, FlexItem } from '@wordpress/components';
 import { useRef, forwardRef, useState, useEffect } from '@wordpress/element';
 import { Icon, settings } from '@wordpress/icons';
+import { __ } from '@wordpress/i18n';
 
 /**
  * Internal dependencies
@@ -81,6 +82,7 @@ export default forwardRef(({ showSettingsModal, theme, plugins }, ref) => {
 								type="text"
 								autoComplete="off"
 								className="wpplayground-url-bar__input"
+								title={__('Playground URL', 'wasm-demo')}
 							/>
 						</div>
 						<input
