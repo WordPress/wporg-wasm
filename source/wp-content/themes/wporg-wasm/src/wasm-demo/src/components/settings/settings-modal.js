@@ -43,7 +43,8 @@ export default function SettingsModal({
 			<p>
 				Welcome to a new and exciting way of testing WordPress Themes
 				and Plugins. Choose a theme, sprinkle with a plugin or a few,
-				and start a new WordPress Playground – all inside of your browser!
+				and start a new WordPress Playground – all inside of your
+				browser!
 			</p>
 
 			<Flex wrap={true}>
@@ -82,7 +83,7 @@ export default function SettingsModal({
 												<img
 													className="wporg-tab-item-list__theme-thumbnail"
 													src={theme.thumbnail}
-													alt={theme.name}
+													alt={`Theme: ${theme.name}`}
 												/>
 											</div>
 										</FlexItem>
