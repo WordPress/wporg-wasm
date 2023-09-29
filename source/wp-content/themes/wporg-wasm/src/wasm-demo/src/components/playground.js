@@ -82,6 +82,7 @@ export default forwardRef(({ showSettingsModal, theme, plugins }, ref) => {
 								type="text"
 								autoComplete="off"
 								className="wpplayground-url-bar__input"
+								title={__('Playground URL', 'wasm-demo')}
 							/>
 						</div>
 						<input
