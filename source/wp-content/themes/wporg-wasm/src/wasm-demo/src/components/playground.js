@@ -11,7 +11,7 @@ import { __ } from '@wordpress/i18n';
  */
 import Iframe from './iframe';
 
-const BASE_URL = 'https://wasm.wordpress.net/wordpress.html';
+const BASE_URL = 'https://playground.wordpress.net/';
 
 export default forwardRef(({ showSettingsModal, theme, plugins }, ref) => {
 	const [url, setUrl] = useState('');
