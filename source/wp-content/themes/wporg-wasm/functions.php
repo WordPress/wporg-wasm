@@ -8,6 +8,8 @@ require_once __DIR__ . '/inc/block-styles.php';
 require_once __DIR__ . '/src/wasm-demo/wasm-demo.php';
 
 add_action( 'wp_enqueue_scripts', __NAMESPACE__ . '\enqueue_assets' );
+add_filter( 'wporg_block_navigation_menus', __NAMESPACE__ . '\add_site_navigation_menus' );
+
 
 /**
  * Enqueue scripts and styles.
@@ -25,3 +27,63 @@ function enqueue_assets() {
 	wp_style_add_data( 'wporg-wasm-style', 'rtl', 'replace' );
 
 }
+
+/**
+ * Register the custom navigation menu for the local nav.
+ *
+ * @return void
+ */
+function register_my_menus() {
+	register_nav_menus(
+		array(
+			'local-nav' => __( 'Local Nav' ),
+		)
+	);
+}
+add_action( 'init', __NAMESPACE__ . '\register_my_menus' );
+
+/**
+ * Get the primary navigation menu object if it exists.
+ */
+function wporg_wasm_get_local_nav_menu_object() {
+	$local_nav_menu_locations = get_nav_menu_locations();
+	$local_nav_menu_object = isset( $local_nav_menu_locations['local-nav'] )
+		? wp_get_nav_menu_object( $local_nav_menu_locations['local-nav'] )
+		: false;
+
+	return $local_nav_menu_object;
+}
+
+/**
+ * Provide a list of local navigation menus.
+ */
+function wporg_wasm_add_site_navigation_menus( $menus ) {
+	if ( is_admin() ) {
+		return;
+	}
+	$local_nav_menu_object = wporg_wasm_get_local_nav_menu_object();
+
+	if ( ! $local_nav_menu_object ) {
+		return array();
+	}
+
+	$menu_items = wp_get_nav_menu_items( $local_nav_menu_object->term_id );
+
+	if ( ! $menu_items || empty( $menu_items ) ) {
+		return array();
+	}
+
+	return array(
+		'wasm' => array_map(
+			function( $menu_item ) {
+				return array(
+					'label' => esc_html( $menu_item->title ),
+					'url' => esc_url( $menu_item->url )
+				);
+			},
+			// Limit local nav items to 6
+			array_slice( $menu_items, 0, 6 )
+		)
+	);
+}
+add_filter( 'wporg_block_navigation_menus', __NAMESPACE__ . '\wporg_wasm_add_site_navigation_menus' );
