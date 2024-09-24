@@ -1,6 +1,6 @@
 <?php
 
-namespace WordPressdotorg\Theme\Showcase_2022;
+namespace WordPressdotorg\Theme\Wasm_2024;
 
 require_once __DIR__ . '/inc/block-styles.php';
 
