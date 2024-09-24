@@ -7,10 +7,6 @@ require_once __DIR__ . '/inc/block-styles.php';
 // Blocks
 require_once __DIR__ . '/src/wasm-demo/wasm-demo.php';
 
-add_action( 'wp_enqueue_scripts', __NAMESPACE__ . '\enqueue_assets' );
-add_filter( 'wporg_block_navigation_menus', __NAMESPACE__ . '\add_site_navigation_menus' );
-
-
 /**
  * Enqueue scripts and styles.
  */
@@ -25,8 +21,8 @@ function enqueue_assets() {
 		filemtime( __DIR__ . '/style.css' )
 	);
 	wp_style_add_data( 'wporg-wasm-style', 'rtl', 'replace' );
-
 }
+add_action( 'wp_enqueue_scripts', __NAMESPACE__ . '\enqueue_assets' );
 
 /**
  * Register the custom navigation menu for the local nav.
