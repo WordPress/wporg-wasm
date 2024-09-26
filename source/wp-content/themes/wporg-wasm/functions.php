@@ -39,9 +39,9 @@ function register_my_menus() {
 add_action( 'init', __NAMESPACE__ . '\register_my_menus' );
 
 /**
- * Get the primary navigation menu object if it exists.
+ * Get the Local Nav navigation menu object if it exists.
  */
-function wporg_wasm_get_local_nav_menu_object() {
+function _get_local_nav_menu_object() {
 	$local_nav_menu_locations = get_nav_menu_locations();
 	$local_nav_menu_object = isset( $local_nav_menu_locations['local-nav'] )
 		? wp_get_nav_menu_object( $local_nav_menu_locations['local-nav'] )
@@ -53,33 +53,34 @@ function wporg_wasm_get_local_nav_menu_object() {
 /**
  * Provide a list of local navigation menus.
  */
-function wporg_wasm_add_site_navigation_menus( $menus ) {
+function add_site_navigation_menus( $menus ) {
 	if ( is_admin() ) {
-		return;
+		return $menus;
 	}
-	$local_nav_menu_object = wporg_wasm_get_local_nav_menu_object();
+
+	$local_nav_menu_object = _get_local_nav_menu_object();
 
 	if ( ! $local_nav_menu_object ) {
-		return array();
+		return $menus;
 	}
 
 	$menu_items = wp_get_nav_menu_items( $local_nav_menu_object->term_id );
 
 	if ( ! $menu_items || empty( $menu_items ) ) {
-		return array();
+		return $menus;
 	}
 
-	return array(
-		'wasm' => array_map(
-			function( $menu_item ) {
-				return array(
-					'label' => esc_html( $menu_item->title ),
-					'url' => esc_url( $menu_item->url )
-				);
-			},
-			// Limit local nav items to 6
-			array_slice( $menu_items, 0, 6 )
-		)
+	$menus['wasm'] = array_map(
+		function( $menu_item ) {
+			return array(
+				'label' => esc_html( $menu_item->title ),
+				'url' => esc_url( $menu_item->url )
+			);
+		},
+		// Limit local nav items to 6
+		array_slice( $menu_items, 0, 6 )
 	);
+
+	return $menus;
 }
-add_filter( 'wporg_block_navigation_menus', __NAMESPACE__ . '\wporg_wasm_add_site_navigation_menus' );
+add_filter( 'wporg_block_navigation_menus', __NAMESPACE__ . '\add_site_navigation_menus' );
